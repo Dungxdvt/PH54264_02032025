@@ -41,7 +41,6 @@ public class SeleniumWebdriverTest {
 //
 //        //test
 //        WebElement webElement = webDriver.findElement(By.xpath("//*[@id=\"SmokeTests\"]"));
-    //f
 //    }
 
 }
