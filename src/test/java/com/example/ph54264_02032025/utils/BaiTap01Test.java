@@ -50,7 +50,8 @@ class BaiTap01Test {
     }
 
     @Test
-    void sumOdd() {
+    void sumOddd() {
         assertEquals(513, baiTap01.SumOdd(50));
     }
+
 }
