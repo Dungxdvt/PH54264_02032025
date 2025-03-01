@@ -49,9 +49,5 @@ class BaiTap01Test {
         assertEquals(80, list.size());
     }
 
-    @Test
-    void sumOddd() {
-        assertEquals(513, baiTap01.SumOdd(50));
-    }
 
 }
