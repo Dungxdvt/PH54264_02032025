@@ -40,5 +40,5 @@ public class Calculator {
         }
         return list;
     }
-    //hhhlk
+    //sâg
 }
