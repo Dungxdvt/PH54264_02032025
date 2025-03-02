@@ -6,38 +6,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SanPhamService {
-    private List<SanPham> list = new ArrayList<>();
+    List<SanPham> sanPhamList = new ArrayList<>();
 
-    public void addSanPham(SanPham sanPham){
-        if (sanPham == null){
-            throw new IllegalArgumentException("SanPham is null or empty");
+    public void addSanPham(SanPham sanPham) {
+        sanPhamList.add(sanPham);
+    }
+
+    public void updateSanPham(SanPham sanPham) {
+        if (sanPham == null || sanPham.getMa() == null || sanPham.getMa().isEmpty()) {
+            throw new IllegalArgumentException("San pham is null or empty");
         }
-        list.add(sanPham);
-    }
 
-    public List<SanPham> getSanPham(){
-        return new ArrayList<>(list);
-    }
-
-    public boolean removeSanPham(String ma){
-        for (int i = 0; i < list.size(); i++){
-            if (list.get(i).getMa().equals(ma)){
-                list.remove(i);
+        for (int i = 0; i < sanPhamList.size(); i++) {
+            if (sanPhamList.get(i).getMa().equals(sanPham.getMa())) {
+                sanPhamList.set(i, sanPham);
+                return;
             }
-            return true;
+        }
+
+        throw new IllegalArgumentException("San pham doesn't exist");
+    }
+
+
+    public boolean maExits(String ma) {
+        if (ma.trim().isEmpty()) {
+            throw new IllegalArgumentException("ma is empty");
+        }
+        for (int i = 0; i < sanPhamList.size(); i++) {
+            if (sanPhamList.get(i).getMa().equals(ma)) {
+                throw new IllegalArgumentException("San pham exits");
+            }
         }
         return false;
     }
 
-    public boolean isMaExits(String ma){
-        if (ma == null){
-            throw new IllegalArgumentException("ma is null or empty");
-        }
-        for (int i = 0; i < list.size(); i++){
-            if (list.get(i).getMa().equals(ma)){
-                return true;
-            }
-        }
-        return false;
+    public List<SanPham> getSanPhamList() {
+        return new ArrayList<>(sanPhamList);
     }
+
 }

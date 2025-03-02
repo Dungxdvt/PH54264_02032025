@@ -15,25 +15,44 @@ class SanPhamServiceTest {
         sanPhamService = new SanPhamService();
     }
 
+
     @Test
-    void addSanPhamValid() {
-        SanPham sanPham = new SanPham("SP01", "Bat", 2004, 30000, 100, "Bat");
+    void updateSanPhamValid() {
+        SanPham sanPham = new SanPham("SP01", "Bat", 2024, 400000, 350, "Bat");
         sanPhamService.addSanPham(sanPham);
-        assertEquals(1, sanPhamService.getSanPham().size());
+        sanPham.setTen("Thia");
+        sanPham.setGia(300000);
+        sanPhamService.updateSanPham(sanPham);
+        assertEquals("Thia", sanPhamService.getSanPhamList().get(0).getTen());
+    }
+    @Test
+    void updateSanPhamInValid() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> sanPhamService.updateSanPham(null));
+        assertEquals("San pham is null or empty", exception.getMessage());
+    }
+
+    @Test
+    void updateSanPhamMaExit() {
+        Exception exception2 = assertThrows(IllegalArgumentException.class,
+                () -> sanPhamService.updateSanPham(new SanPham("SP99", "Non-existent", 2024, 300000, 345555, "Bat")));
+        assertEquals("San pham doesn't exist", exception2.getMessage());
+    }
+
+    @Test
+    void updateSanPhamMaNull() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> sanPhamService.updateSanPham(new SanPham(null, "Bat", 2024, 300000, 345555, "Bat")));
+
+        assertEquals("San pham is null or empty", exception.getMessage());
     }
 
 
-    @Test
-    void removeSanPham() {
-        SanPham sanPham = new SanPham("SP01", "Bat", 2004, 30000, 100, "Bat");
-        sanPhamService.addSanPham(sanPham);
-        assertTrue(sanPhamService.removeSanPham("SP01"));
-    }
 
     @Test
-    void isMaExits() {
-        SanPham sanPham = new SanPham("SP01", "Bat", 2004, 30000, 100, "Bat");
+    void maExits() {
+        SanPham sanPham = new SanPham("SP01", "Bat", 2024, 400000, 350, "Bat");
         sanPhamService.addSanPham(sanPham);
-        assertTrue(sanPhamService.isMaExits("SP01"));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> sanPhamService.maExits("SP01"));
+        assertEquals("San pham exits", exception.getMessage());
     }
 }

@@ -8,14 +8,11 @@ public class SanPham {
     private int soLuong;
     private String danhMuc;
 
-    public SanPham() {
-    }
-
     public SanPham(String ma, String ten, int namBaoHanh, float gia, int soLuong, String danhMuc) {
         this.ma = ma;
-        this.ten = ten;
+        setTen(ten);
         this.namBaoHanh = namBaoHanh;
-        this.gia = gia;
+        setGia(gia);
         this.soLuong = soLuong;
         this.danhMuc = danhMuc;
     }
@@ -29,6 +26,9 @@ public class SanPham {
     }
 
     public String getTen() {
+        if (ten == null || ten.trim().isEmpty()) {
+            throw new IllegalArgumentException("ten invalid");
+        }
         return ten;
     }
 
@@ -45,6 +45,9 @@ public class SanPham {
     }
 
     public float getGia() {
+        if (gia < 0 || gia > 100000000) {
+            throw new IllegalArgumentException("gia invalid");
+        }
         return gia;
     }
 
